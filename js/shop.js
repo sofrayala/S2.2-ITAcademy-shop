@@ -92,7 +92,15 @@ function buy(id) {
 }
 
 // Exercise 2
-function cleanCart() {}
+
+function cleanCart() {
+  if (cart.length > 0) {
+    cart.splice(0);
+    console.log(cart);
+  } else {
+    console.log("Cart is empty");
+  }
+}
 
 // Exercise 3
 function calculateTotal() {
