@@ -123,6 +123,8 @@ function applyPromotionsCart() {
   for (let i = 0; i < cart.length; i++) {
     if (cart[i].id === 1 && cart[i].quantity >= 3) {
       cart[i].subtotalWithDiscount = cart[i].price * 0.8 * cart[i].quantity;
+    } else if (cart[i].id === 3 && cart[i].quantity >= 10) {
+      cart[i].subtotalWithDiscount = cart[i].price * 0.7 * cart[i].quantity;
     } else {
       cart[i].subtotalWithDiscount = cart[i].price * cart[i].quantity;
     }
