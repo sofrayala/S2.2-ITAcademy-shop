@@ -131,9 +131,56 @@ function applyPromotionsCart() {
   }
 }
 
+/* Ya has desarrollado toda la lógica básica de la aplicación, ha llegado el momento de  mostrar al usuario el carrito de la compra .
+
+El código encargado de mostrar el carrito de la compra en el modal con id " cartModal ", debe incluirse dentro de la función printCart(). Te damos ya creada la maquetación de la tabla de productos, sólo será necesario modificarla para que sea dinámica .
+
+El modal del carrito se abre pulsando el botón del carrito en la esquina superior derecha de la pantalla: */
 // Exercise 5
 function printCart() {
   // Fill the shopping cart modal manipulating the shopping cart dom
+  const cartTableBody = document.getElementById("cart_list");
+  const totalPriceElement = document.getElementById("total_price");
+
+  cartTableBody.innerHTML = "";
+
+  let totalPrice = 0;
+  let itemCount = 0;
+
+  cart.forEach((item) => {
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("th");
+    nameCell.setAttribute("scope", "row");
+    nameCell.textContent = item.name;
+    row.appendChild(nameCell);
+
+    const priceCell = document.createElement("td");
+    priceCell.textContent = `$${item.price.toFixed(2)}`;
+    row.appendChild(priceCell);
+
+    const quantityCell = document.createElement("td");
+    quantityCell.textContent = item.quantity;
+    row.appendChild(quantityCell);
+
+    const subtotalCell = document.createElement("td");
+    const subtotal = item.subtotalWithDiscount || item.price * item.quantity;
+    subtotalCell.textContent = `$${subtotal.toFixed(2)}`;
+    row.appendChild(subtotalCell);
+
+    cartTableBody.appendChild(row);
+
+    totalPrice += subtotal;
+    itemCount += item.quantity;
+  });
+
+  totalPriceElement.textContent = totalPrice.toFixed(2);
+
+  const countProductElement = document.getElementById("count_product");
+  countProductElement.textContent = itemCount;
+
+  const cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
+  cartModal.show();
 }
 
 // ** Nivell II **
