@@ -131,11 +131,6 @@ function applyPromotionsCart() {
   }
 }
 
-/* Ya has desarrollado toda la lógica básica de la aplicación, ha llegado el momento de  mostrar al usuario el carrito de la compra .
-
-El código encargado de mostrar el carrito de la compra en el modal con id " cartModal ", debe incluirse dentro de la función printCart(). Te damos ya creada la maquetación de la tabla de productos, sólo será necesario modificarla para que sea dinámica .
-
-El modal del carrito se abre pulsando el botón del carrito en la esquina superior derecha de la pantalla: */
 // Exercise 5
 function printCart() {
   // Fill the shopping cart modal manipulating the shopping cart dom
@@ -168,6 +163,15 @@ function printCart() {
     subtotalCell.textContent = `$${subtotal.toFixed(2)}`;
     row.appendChild(subtotalCell);
 
+    //Remove item
+    const removeCell = document.createElement("td");
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.className = "btn btn-danger btn-sm";
+    removeButton.onclick = () => removeFromCart(item.id);
+    removeCell.appendChild(removeButton);
+    row.appendChild(removeCell);
+
     cartTableBody.appendChild(row);
 
     totalPrice += subtotal;
@@ -186,7 +190,20 @@ function printCart() {
 // ** Nivell II **
 
 // Exercise 7
-function removeFromCart(id) {}
+
+function removeFromCart(id) {
+  const productId = cart.findIndex((item) => item.id === id);
+
+  if (productId !== -1) {
+    cart[productId].quantity--;
+
+    if (cart[productId].quantity === 0) {
+      cart.splice(productId, 1);
+    }
+    applyPromotionsCart();
+    printCart();
+  }
+}
 
 function open_modal() {
   printCart();
