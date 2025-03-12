@@ -1,7 +1,5 @@
 # Sprint 2 IT Academy | Shop
 
-# Sprint 2 IT Academy | Shop
-
 ## Introduction
 
 Create an e-commerce roject with javascript.
