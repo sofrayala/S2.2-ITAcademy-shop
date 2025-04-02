@@ -94,12 +94,22 @@ function buy(id) {
 // Exercise 2
 
 function cleanCart() {
-  if (cart.length > 0) {
-    cart.splice(0);
-    console.log(cart);
-  } else {
-    console.log("Cart is empty");
-  }
+  // Clear the cart data
+  localStorage.removeItem("cart");
+  document.getElementById("cart_list").innerHTML = "";
+  document.getElementById("total_price").textContent = "0";
+  document.getElementById("count_product").textContent = "0";
+
+  // Close the modal properly
+  let cartModal = new bootstrap.Modal(document.getElementById("cartModal"));
+  cartModal.hide();
+
+  // Remove any remaining modal backdrop
+  document.querySelectorAll(".modal-backdrop").forEach((el) => el.remove());
+
+  // Ensure body scrolling is re-enabled
+  document.body.classList.remove("modal-open");
+  document.body.style.overflow = "auto";
 }
 
 // Exercise 3
